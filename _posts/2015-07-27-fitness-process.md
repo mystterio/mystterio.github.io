@@ -2,7 +2,7 @@
 layout: post
 title:  "健身流程"
 date:   2015-07-27 23:34:56 +0530
-categories: 健身
+categories: fitness
 ---
 1.体态纠正训练
 
