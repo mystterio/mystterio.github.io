@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "健身流程"
+title:  "六种具有转变力量的行为之二"
 date:   2015-07-27 23:34:56 +0530
 categories: emotion
 ---
