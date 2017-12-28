@@ -32,6 +32,7 @@ categories: habit
 <div></div>
 <div></div>
 <div>
-<div>原文：<a href="https://www.scotthyoung.com/blog/2006/04/03/how-to-change-a-habit/">https://www.scotthyoung.com/blog/2006/04/03/how-to-change-a-habit/</a></div>
+<div>[原文]：<a href="https://www.scotthyoung.com/blog/2006/04/03/how-to-change-a-habit/">https://www.scotthyoung.com/blog/2006/04/03/how-to-change-a-habit/</a></div>
 </div>
-<div> （个人水平有限，翻译有误的地方请提出）</div>
+<div> （个人水平有限，翻译有误的地方请包涵）</div>
+[原文]:https://www.scotthyoung.com/blog/2006/04/03/how-to-change-a-habit/
