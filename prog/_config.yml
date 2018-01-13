@@ -1,31 +1,43 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
+permalink   : /:categories/:year/:title/
+markdown    : kramdown
+highlighter : pygments
+
+paginate: 2 #6
+comments: true
+paginate_path: "/page/:num"
+
+source: source
+destination: _site
+sass:
+  sass_dir: _scss
+  style: compressed
 
 # Site settings
-title: Your awesome title
+title: Lora
+description: "A free Jekyll theme"
 email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "/prog" # the subpath of your site, e.g. /blog
-url: "http://fengvei.com" # the base hostname & protocol for your site
-twitter_username: Taffyer 
-github_username:  wild-flame 
+baseurl: "/prog/" # the subpath of your site, e.g. /blog/
+#url: "http://yourdomain.com"
+url: "http://prog.fengvei.com"
+#repository: "https://github.com/nandomoreirame/lora"
+repository: "https://github.com/mystterio/mystte.github.io"
+disqus_shortname: "fernandomoreira"
+google_analytics: UA-52446115-1
 
-# Build settings
-markdown: kramdown
-kramdown:
-  input: GFM
-
-# Third-party services
-# just leave someone empty to disable it
-# google_analytics: 
-disqus_shortname:
-
-# used this for post_excerpt at index_page
-excerpt_separator: <!--description-->
+# social footer
+social:
+  github:
+    slug: github
+    link: http://github.com/nandomoreirame
+  facebook:
+    slug: facebook
+    link: http://facebook.com/fernando.dev
+  twitter:
+    slug: twitter
+    link: http://twitter.com/nandomoreirame
+  instagram:
+    slug: instagram
+    link: http://instagram.com/nandomoreira.me
+  linkedin:
+    slug: linkedin
+    link: http://linkedin.com/in/nandomoreirame
