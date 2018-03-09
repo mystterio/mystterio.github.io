@@ -18,6 +18,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+
       <file leaf-file-name="_config.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
@@ -80,6 +81,7 @@
         </entry>
       </file>
       <file leaf-file-name="2016-09-18-hagura.md" pinned="false" current-in-tab="false">
+
         <entry file="file://$PROJECT_DIR$/_posts/2016-09-18-hagura.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -92,7 +94,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CNAME" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CNAME" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CNAME">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="54">
@@ -169,6 +171,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="mystte.github.io" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mystte.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mystte.github.io" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_posts" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -274,13 +290,15 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13576000" />
+
+    <option name="totallyTimeSpent" value="12900000" />
+
   </component>
   <component name="ToolWindowManager">
-    <frame x="533" y="79" width="1382" height="941" extended-state="1" />
-    <editor active="true" />
+    <frame x="533" y="79" width="1382" height="941" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37099236" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37099236" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -310,13 +328,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/theme.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/post.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -900,6 +911,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/prog/header.html" />
+    <entry file="file://$PROJECT_DIR$/prog/_config.yml" />
+    <entry file="file://$PROJECT_DIR$/prog/CNAME" />
+    <entry file="file://$PROJECT_DIR$/CNAME">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2016-09-18-hagura.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -908,76 +948,6 @@
             <folding />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/prog/header.html" />
-    <entry file="file://$PROJECT_DIR$/prog/_config.yml" />
-    <entry file="file://$PROJECT_DIR$/prog/CNAME" />
-    <entry file="file://$PROJECT_DIR$/_config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <marker date="1515675788713" expanded="true" signature="90:108" ph="mystte@fox..." />
-            <marker date="1515675788713" expanded="true" signature="125:130" ph="rouge" />
-            <marker date="1515675788713" expanded="true" signature="141:149" ph="kramdown" />
-            <marker date="1515675788713" expanded="true" signature="230:243" ph="UA-8397901..." />
-            <marker date="1515675788713" expanded="true" signature="274:286" ph="webjeda-de..." />
-            <marker date="1515675788713" expanded="true" signature="318:608" ph="compress_h...: &lt;7 keys&gt;" />
-            <marker date="1515675788713" expanded="true" signature="335:480" ph="clippings: [26 items]" />
-            <marker date="1515675788713" expanded="true" signature="347:351" ph="html" />
-            <marker date="1515675788713" expanded="true" signature="352:355" ph="div" />
-            <marker date="1515675788713" expanded="true" signature="360:362" ph="ul" />
-            <marker date="1515675788713" expanded="true" signature="364:366" ph="td" />
-            <marker date="1515675788713" expanded="true" signature="368:370" ph="h1" />
-            <marker date="1515675788713" expanded="true" signature="372:374" ph="h2" />
-            <marker date="1515675788713" expanded="true" signature="376:378" ph="h3" />
-            <marker date="1515675788713" expanded="true" signature="380:382" ph="h4" />
-            <marker date="1515675788713" expanded="true" signature="383:387" ph="link" />
-            <marker date="1515675788713" expanded="true" signature="389:393" ph="meta" />
-            <marker date="1515675788713" expanded="true" signature="395:401" ph="footer" />
-            <marker date="1515675788713" expanded="true" signature="403:406" ph="nav" />
-            <marker date="1515675788713" expanded="true" signature="408:411" ph="img" />
-            <marker date="1515675788713" expanded="true" signature="413:419" ph="header" />
-            <marker date="1515675788713" expanded="true" signature="421:423" ph="hr" />
-            <marker date="1515675788713" expanded="true" signature="425:427" ph="br" />
-            <marker date="1515675788713" expanded="true" signature="429:433" ph="head" />
-            <marker date="1515675788713" expanded="true" signature="435:440" ph="style" />
-            <marker date="1515675788713" expanded="true" signature="442:444" ph="li" />
-            <marker date="1515675788713" expanded="true" signature="446:448" ph="ul" />
-            <marker date="1515675788713" expanded="true" signature="450:452" ph="ol" />
-            <marker date="1515675788713" expanded="true" signature="454:458" ph="time" />
-            <marker date="1515675788713" expanded="true" signature="460:464" ph="main" />
-            <marker date="1515675788713" expanded="true" signature="466:472" ph="script" />
-            <marker date="1515675788713" expanded="true" signature="474:479" ph="title" />
-            <marker date="1515675788713" expanded="true" signature="483:510" ph="comments: [2 items]" />
-            <marker date="1515675788713" expanded="true" signature="494:501" ph="&lt;!-- " />
-            <marker date="1515675788713" expanded="true" signature="503:509" ph=" --&gt;" />
-            <marker date="1515675788713" expanded="true" signature="513:527" ph="endings: [1 item]" />
-            <marker date="1515675788713" expanded="true" signature="523:526" ph="all" />
-            <marker date="1515675788713" expanded="true" signature="530:555" ph="ignore: &lt;1 key&gt;" />
-            <marker date="1515675788713" expanded="true" signature="542:555" ph="envs: [1 item]" />
-            <marker date="1515675788713" expanded="true" signature="549:554" ph="local" />
-            <marker date="1515675788713" expanded="true" signature="570:575" ph="false" />
-            <marker date="1515675788713" expanded="true" signature="587:592" ph="false" />
-            <marker date="1515675788713" expanded="true" signature="595:608" ph="startings: [0 items]" />
-            <marker date="1515675788713" expanded="true" signature="613:637" ph="sass: &lt;1 key&gt;" />
-            <marker date="1515675788713" expanded="true" signature="627:637" ph="compressed" />
-            <marker date="1515675788713" expanded="true" signature="639:659" ph="exclude: &lt;1 item&gt;" />
-            <marker date="1515675788713" expanded="true" signature="650:659" ph="README.md" />
-            <marker date="1515675788713" expanded="true" signature="662:701" ph="gems: [2 items]" />
-            <marker date="1515675788713" expanded="true" signature="669:683" ph="jekyll-seo..." />
-            <marker date="1515675788713" expanded="true" signature="685:700" ph="jekyll-pag..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNAME">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
