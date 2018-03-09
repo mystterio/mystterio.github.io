@@ -22,8 +22,61 @@
         <entry file="file://$PROJECT_DIR$/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-              <folding />
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding>
+                <marker date="1520596953908" expanded="true" signature="34:44" ph="嗨|生活本就是一个谜..." />
+                <marker date="1520596953908" expanded="true" signature="55:67" ph="/developme..." />
+                <marker date="1520596953908" expanded="true" signature="100:118" ph="mystte@fox..." />
+                <marker date="1520596953908" expanded="true" signature="135:140" ph="rouge" />
+                <marker date="1520596953908" expanded="true" signature="151:159" ph="kramdown" />
+                <marker date="1520596953908" expanded="true" signature="240:253" ph="UA-8397901..." />
+                <marker date="1520596953908" expanded="true" signature="284:296" ph="webjeda-de..." />
+                <marker date="1520596953908" expanded="true" signature="328:618" ph="compress_h...: &lt;7 keys&gt;" />
+                <marker date="1520596953908" expanded="true" signature="345:490" ph="clippings: [26 items]" />
+                <marker date="1520596953908" expanded="true" signature="357:361" ph="html" />
+                <marker date="1520596953908" expanded="true" signature="362:365" ph="div" />
+                <marker date="1520596953908" expanded="true" signature="370:372" ph="ul" />
+                <marker date="1520596953908" expanded="true" signature="374:376" ph="td" />
+                <marker date="1520596953908" expanded="true" signature="378:380" ph="h1" />
+                <marker date="1520596953908" expanded="true" signature="382:384" ph="h2" />
+                <marker date="1520596953908" expanded="true" signature="386:388" ph="h3" />
+                <marker date="1520596953908" expanded="true" signature="390:392" ph="h4" />
+                <marker date="1520596953908" expanded="true" signature="393:397" ph="link" />
+                <marker date="1520596953908" expanded="true" signature="399:403" ph="meta" />
+                <marker date="1520596953908" expanded="true" signature="405:411" ph="footer" />
+                <marker date="1520596953908" expanded="true" signature="413:416" ph="nav" />
+                <marker date="1520596953908" expanded="true" signature="418:421" ph="img" />
+                <marker date="1520596953908" expanded="true" signature="423:429" ph="header" />
+                <marker date="1520596953908" expanded="true" signature="431:433" ph="hr" />
+                <marker date="1520596953908" expanded="true" signature="435:437" ph="br" />
+                <marker date="1520596953908" expanded="true" signature="439:443" ph="head" />
+                <marker date="1520596953908" expanded="true" signature="445:450" ph="style" />
+                <marker date="1520596953908" expanded="true" signature="452:454" ph="li" />
+                <marker date="1520596953908" expanded="true" signature="456:458" ph="ul" />
+                <marker date="1520596953908" expanded="true" signature="460:462" ph="ol" />
+                <marker date="1520596953908" expanded="true" signature="464:468" ph="time" />
+                <marker date="1520596953908" expanded="true" signature="470:474" ph="main" />
+                <marker date="1520596953908" expanded="true" signature="476:482" ph="script" />
+                <marker date="1520596953908" expanded="true" signature="484:489" ph="title" />
+                <marker date="1520596953908" expanded="true" signature="493:520" ph="comments: [2 items]" />
+                <marker date="1520596953908" expanded="true" signature="504:511" ph="&lt;!-- " />
+                <marker date="1520596953908" expanded="true" signature="513:519" ph=" --&gt;" />
+                <marker date="1520596953908" expanded="true" signature="523:537" ph="endings: [1 item]" />
+                <marker date="1520596953908" expanded="true" signature="533:536" ph="all" />
+                <marker date="1520596953908" expanded="true" signature="540:565" ph="ignore: &lt;1 key&gt;" />
+                <marker date="1520596953908" expanded="true" signature="552:565" ph="envs: [1 item]" />
+                <marker date="1520596953908" expanded="true" signature="559:564" ph="local" />
+                <marker date="1520596953908" expanded="true" signature="580:585" ph="false" />
+                <marker date="1520596953908" expanded="true" signature="597:602" ph="false" />
+                <marker date="1520596953908" expanded="true" signature="605:618" ph="startings: [0 items]" />
+                <marker date="1520596953908" expanded="true" signature="623:647" ph="sass: &lt;1 key&gt;" />
+                <marker date="1520596953908" expanded="true" signature="637:647" ph="compressed" />
+                <marker date="1520596953908" expanded="true" signature="649:669" ph="exclude: &lt;1 item&gt;" />
+                <marker date="1520596953908" expanded="true" signature="660:669" ph="README.md" />
+                <marker date="1520596953908" expanded="true" signature="672:711" ph="gems: [2 items]" />
+                <marker date="1520596953908" expanded="true" signature="679:693" ph="jekyll-seo..." />
+                <marker date="1520596953908" expanded="true" signature="695:710" ph="jekyll-pag..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,7 +98,7 @@
         <entry file="file://$PROJECT_DIR$/CNAME">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="54">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -218,12 +271,12 @@
       <workItem from="1515201458609" duration="1474000" />
       <workItem from="1515811229104" duration="2431000" />
       <workItem from="1520594761411" duration="639000" />
-      <workItem from="1520596327846" duration="602000" />
+      <workItem from="1520596327846" duration="730000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12851000" />
+    <option name="totallyTimeSpent" value="12979000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="533" y="79" width="1382" height="941" extended-state="1" />
@@ -334,7 +387,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1520596953908" expanded="true" signature="34:44" ph="嗨|生活本就是一个谜..." />
+            <marker date="1520596953908" expanded="true" signature="55:67" ph="/developme..." />
+            <marker date="1520596953908" expanded="true" signature="100:118" ph="mystte@fox..." />
+            <marker date="1520596953908" expanded="true" signature="135:140" ph="rouge" />
+            <marker date="1520596953908" expanded="true" signature="151:159" ph="kramdown" />
+            <marker date="1520596953908" expanded="true" signature="240:253" ph="UA-8397901..." />
+            <marker date="1520596953908" expanded="true" signature="284:296" ph="webjeda-de..." />
+            <marker date="1520596953908" expanded="true" signature="328:618" ph="compress_h...: &lt;7 keys&gt;" />
+            <marker date="1520596953908" expanded="true" signature="345:490" ph="clippings: [26 items]" />
+            <marker date="1520596953908" expanded="true" signature="357:361" ph="html" />
+            <marker date="1520596953908" expanded="true" signature="362:365" ph="div" />
+            <marker date="1520596953908" expanded="true" signature="370:372" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="374:376" ph="td" />
+            <marker date="1520596953908" expanded="true" signature="378:380" ph="h1" />
+            <marker date="1520596953908" expanded="true" signature="382:384" ph="h2" />
+            <marker date="1520596953908" expanded="true" signature="386:388" ph="h3" />
+            <marker date="1520596953908" expanded="true" signature="390:392" ph="h4" />
+            <marker date="1520596953908" expanded="true" signature="393:397" ph="link" />
+            <marker date="1520596953908" expanded="true" signature="399:403" ph="meta" />
+            <marker date="1520596953908" expanded="true" signature="405:411" ph="footer" />
+            <marker date="1520596953908" expanded="true" signature="413:416" ph="nav" />
+            <marker date="1520596953908" expanded="true" signature="418:421" ph="img" />
+            <marker date="1520596953908" expanded="true" signature="423:429" ph="header" />
+            <marker date="1520596953908" expanded="true" signature="431:433" ph="hr" />
+            <marker date="1520596953908" expanded="true" signature="435:437" ph="br" />
+            <marker date="1520596953908" expanded="true" signature="439:443" ph="head" />
+            <marker date="1520596953908" expanded="true" signature="445:450" ph="style" />
+            <marker date="1520596953908" expanded="true" signature="452:454" ph="li" />
+            <marker date="1520596953908" expanded="true" signature="456:458" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="460:462" ph="ol" />
+            <marker date="1520596953908" expanded="true" signature="464:468" ph="time" />
+            <marker date="1520596953908" expanded="true" signature="470:474" ph="main" />
+            <marker date="1520596953908" expanded="true" signature="476:482" ph="script" />
+            <marker date="1520596953908" expanded="true" signature="484:489" ph="title" />
+            <marker date="1520596953908" expanded="true" signature="493:520" ph="comments: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="504:511" ph="&lt;!-- " />
+            <marker date="1520596953908" expanded="true" signature="513:519" ph=" --&gt;" />
+            <marker date="1520596953908" expanded="true" signature="523:537" ph="endings: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="533:536" ph="all" />
+            <marker date="1520596953908" expanded="true" signature="540:565" ph="ignore: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="552:565" ph="envs: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="559:564" ph="local" />
+            <marker date="1520596953908" expanded="true" signature="580:585" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="597:602" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="605:618" ph="startings: [0 items]" />
+            <marker date="1520596953908" expanded="true" signature="623:647" ph="sass: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="637:647" ph="compressed" />
+            <marker date="1520596953908" expanded="true" signature="649:669" ph="exclude: &lt;1 item&gt;" />
+            <marker date="1520596953908" expanded="true" signature="660:669" ph="README.md" />
+            <marker date="1520596953908" expanded="true" signature="672:711" ph="gems: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="679:693" ph="jekyll-seo..." />
+            <marker date="1520596953908" expanded="true" signature="695:710" ph="jekyll-pag..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -387,7 +493,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1520596953908" expanded="true" signature="34:44" ph="嗨|生活本就是一个谜..." />
+            <marker date="1520596953908" expanded="true" signature="55:67" ph="/developme..." />
+            <marker date="1520596953908" expanded="true" signature="100:118" ph="mystte@fox..." />
+            <marker date="1520596953908" expanded="true" signature="135:140" ph="rouge" />
+            <marker date="1520596953908" expanded="true" signature="151:159" ph="kramdown" />
+            <marker date="1520596953908" expanded="true" signature="240:253" ph="UA-8397901..." />
+            <marker date="1520596953908" expanded="true" signature="284:296" ph="webjeda-de..." />
+            <marker date="1520596953908" expanded="true" signature="328:618" ph="compress_h...: &lt;7 keys&gt;" />
+            <marker date="1520596953908" expanded="true" signature="345:490" ph="clippings: [26 items]" />
+            <marker date="1520596953908" expanded="true" signature="357:361" ph="html" />
+            <marker date="1520596953908" expanded="true" signature="362:365" ph="div" />
+            <marker date="1520596953908" expanded="true" signature="370:372" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="374:376" ph="td" />
+            <marker date="1520596953908" expanded="true" signature="378:380" ph="h1" />
+            <marker date="1520596953908" expanded="true" signature="382:384" ph="h2" />
+            <marker date="1520596953908" expanded="true" signature="386:388" ph="h3" />
+            <marker date="1520596953908" expanded="true" signature="390:392" ph="h4" />
+            <marker date="1520596953908" expanded="true" signature="393:397" ph="link" />
+            <marker date="1520596953908" expanded="true" signature="399:403" ph="meta" />
+            <marker date="1520596953908" expanded="true" signature="405:411" ph="footer" />
+            <marker date="1520596953908" expanded="true" signature="413:416" ph="nav" />
+            <marker date="1520596953908" expanded="true" signature="418:421" ph="img" />
+            <marker date="1520596953908" expanded="true" signature="423:429" ph="header" />
+            <marker date="1520596953908" expanded="true" signature="431:433" ph="hr" />
+            <marker date="1520596953908" expanded="true" signature="435:437" ph="br" />
+            <marker date="1520596953908" expanded="true" signature="439:443" ph="head" />
+            <marker date="1520596953908" expanded="true" signature="445:450" ph="style" />
+            <marker date="1520596953908" expanded="true" signature="452:454" ph="li" />
+            <marker date="1520596953908" expanded="true" signature="456:458" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="460:462" ph="ol" />
+            <marker date="1520596953908" expanded="true" signature="464:468" ph="time" />
+            <marker date="1520596953908" expanded="true" signature="470:474" ph="main" />
+            <marker date="1520596953908" expanded="true" signature="476:482" ph="script" />
+            <marker date="1520596953908" expanded="true" signature="484:489" ph="title" />
+            <marker date="1520596953908" expanded="true" signature="493:520" ph="comments: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="504:511" ph="&lt;!-- " />
+            <marker date="1520596953908" expanded="true" signature="513:519" ph=" --&gt;" />
+            <marker date="1520596953908" expanded="true" signature="523:537" ph="endings: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="533:536" ph="all" />
+            <marker date="1520596953908" expanded="true" signature="540:565" ph="ignore: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="552:565" ph="envs: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="559:564" ph="local" />
+            <marker date="1520596953908" expanded="true" signature="580:585" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="597:602" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="605:618" ph="startings: [0 items]" />
+            <marker date="1520596953908" expanded="true" signature="623:647" ph="sass: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="637:647" ph="compressed" />
+            <marker date="1520596953908" expanded="true" signature="649:669" ph="exclude: &lt;1 item&gt;" />
+            <marker date="1520596953908" expanded="true" signature="660:669" ph="README.md" />
+            <marker date="1520596953908" expanded="true" signature="672:711" ph="gems: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="679:693" ph="jekyll-seo..." />
+            <marker date="1520596953908" expanded="true" signature="695:710" ph="jekyll-pag..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -440,7 +599,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1520596953908" expanded="true" signature="34:44" ph="嗨|生活本就是一个谜..." />
+            <marker date="1520596953908" expanded="true" signature="55:67" ph="/developme..." />
+            <marker date="1520596953908" expanded="true" signature="100:118" ph="mystte@fox..." />
+            <marker date="1520596953908" expanded="true" signature="135:140" ph="rouge" />
+            <marker date="1520596953908" expanded="true" signature="151:159" ph="kramdown" />
+            <marker date="1520596953908" expanded="true" signature="240:253" ph="UA-8397901..." />
+            <marker date="1520596953908" expanded="true" signature="284:296" ph="webjeda-de..." />
+            <marker date="1520596953908" expanded="true" signature="328:618" ph="compress_h...: &lt;7 keys&gt;" />
+            <marker date="1520596953908" expanded="true" signature="345:490" ph="clippings: [26 items]" />
+            <marker date="1520596953908" expanded="true" signature="357:361" ph="html" />
+            <marker date="1520596953908" expanded="true" signature="362:365" ph="div" />
+            <marker date="1520596953908" expanded="true" signature="370:372" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="374:376" ph="td" />
+            <marker date="1520596953908" expanded="true" signature="378:380" ph="h1" />
+            <marker date="1520596953908" expanded="true" signature="382:384" ph="h2" />
+            <marker date="1520596953908" expanded="true" signature="386:388" ph="h3" />
+            <marker date="1520596953908" expanded="true" signature="390:392" ph="h4" />
+            <marker date="1520596953908" expanded="true" signature="393:397" ph="link" />
+            <marker date="1520596953908" expanded="true" signature="399:403" ph="meta" />
+            <marker date="1520596953908" expanded="true" signature="405:411" ph="footer" />
+            <marker date="1520596953908" expanded="true" signature="413:416" ph="nav" />
+            <marker date="1520596953908" expanded="true" signature="418:421" ph="img" />
+            <marker date="1520596953908" expanded="true" signature="423:429" ph="header" />
+            <marker date="1520596953908" expanded="true" signature="431:433" ph="hr" />
+            <marker date="1520596953908" expanded="true" signature="435:437" ph="br" />
+            <marker date="1520596953908" expanded="true" signature="439:443" ph="head" />
+            <marker date="1520596953908" expanded="true" signature="445:450" ph="style" />
+            <marker date="1520596953908" expanded="true" signature="452:454" ph="li" />
+            <marker date="1520596953908" expanded="true" signature="456:458" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="460:462" ph="ol" />
+            <marker date="1520596953908" expanded="true" signature="464:468" ph="time" />
+            <marker date="1520596953908" expanded="true" signature="470:474" ph="main" />
+            <marker date="1520596953908" expanded="true" signature="476:482" ph="script" />
+            <marker date="1520596953908" expanded="true" signature="484:489" ph="title" />
+            <marker date="1520596953908" expanded="true" signature="493:520" ph="comments: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="504:511" ph="&lt;!-- " />
+            <marker date="1520596953908" expanded="true" signature="513:519" ph=" --&gt;" />
+            <marker date="1520596953908" expanded="true" signature="523:537" ph="endings: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="533:536" ph="all" />
+            <marker date="1520596953908" expanded="true" signature="540:565" ph="ignore: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="552:565" ph="envs: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="559:564" ph="local" />
+            <marker date="1520596953908" expanded="true" signature="580:585" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="597:602" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="605:618" ph="startings: [0 items]" />
+            <marker date="1520596953908" expanded="true" signature="623:647" ph="sass: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="637:647" ph="compressed" />
+            <marker date="1520596953908" expanded="true" signature="649:669" ph="exclude: &lt;1 item&gt;" />
+            <marker date="1520596953908" expanded="true" signature="660:669" ph="README.md" />
+            <marker date="1520596953908" expanded="true" signature="672:711" ph="gems: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="679:693" ph="jekyll-seo..." />
+            <marker date="1520596953908" expanded="true" signature="695:710" ph="jekyll-pag..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -456,7 +668,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1520596953908" expanded="true" signature="34:44" ph="嗨|生活本就是一个谜..." />
+            <marker date="1520596953908" expanded="true" signature="55:67" ph="/developme..." />
+            <marker date="1520596953908" expanded="true" signature="100:118" ph="mystte@fox..." />
+            <marker date="1520596953908" expanded="true" signature="135:140" ph="rouge" />
+            <marker date="1520596953908" expanded="true" signature="151:159" ph="kramdown" />
+            <marker date="1520596953908" expanded="true" signature="240:253" ph="UA-8397901..." />
+            <marker date="1520596953908" expanded="true" signature="284:296" ph="webjeda-de..." />
+            <marker date="1520596953908" expanded="true" signature="328:618" ph="compress_h...: &lt;7 keys&gt;" />
+            <marker date="1520596953908" expanded="true" signature="345:490" ph="clippings: [26 items]" />
+            <marker date="1520596953908" expanded="true" signature="357:361" ph="html" />
+            <marker date="1520596953908" expanded="true" signature="362:365" ph="div" />
+            <marker date="1520596953908" expanded="true" signature="370:372" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="374:376" ph="td" />
+            <marker date="1520596953908" expanded="true" signature="378:380" ph="h1" />
+            <marker date="1520596953908" expanded="true" signature="382:384" ph="h2" />
+            <marker date="1520596953908" expanded="true" signature="386:388" ph="h3" />
+            <marker date="1520596953908" expanded="true" signature="390:392" ph="h4" />
+            <marker date="1520596953908" expanded="true" signature="393:397" ph="link" />
+            <marker date="1520596953908" expanded="true" signature="399:403" ph="meta" />
+            <marker date="1520596953908" expanded="true" signature="405:411" ph="footer" />
+            <marker date="1520596953908" expanded="true" signature="413:416" ph="nav" />
+            <marker date="1520596953908" expanded="true" signature="418:421" ph="img" />
+            <marker date="1520596953908" expanded="true" signature="423:429" ph="header" />
+            <marker date="1520596953908" expanded="true" signature="431:433" ph="hr" />
+            <marker date="1520596953908" expanded="true" signature="435:437" ph="br" />
+            <marker date="1520596953908" expanded="true" signature="439:443" ph="head" />
+            <marker date="1520596953908" expanded="true" signature="445:450" ph="style" />
+            <marker date="1520596953908" expanded="true" signature="452:454" ph="li" />
+            <marker date="1520596953908" expanded="true" signature="456:458" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="460:462" ph="ol" />
+            <marker date="1520596953908" expanded="true" signature="464:468" ph="time" />
+            <marker date="1520596953908" expanded="true" signature="470:474" ph="main" />
+            <marker date="1520596953908" expanded="true" signature="476:482" ph="script" />
+            <marker date="1520596953908" expanded="true" signature="484:489" ph="title" />
+            <marker date="1520596953908" expanded="true" signature="493:520" ph="comments: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="504:511" ph="&lt;!-- " />
+            <marker date="1520596953908" expanded="true" signature="513:519" ph=" --&gt;" />
+            <marker date="1520596953908" expanded="true" signature="523:537" ph="endings: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="533:536" ph="all" />
+            <marker date="1520596953908" expanded="true" signature="540:565" ph="ignore: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="552:565" ph="envs: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="559:564" ph="local" />
+            <marker date="1520596953908" expanded="true" signature="580:585" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="597:602" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="605:618" ph="startings: [0 items]" />
+            <marker date="1520596953908" expanded="true" signature="623:647" ph="sass: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="637:647" ph="compressed" />
+            <marker date="1520596953908" expanded="true" signature="649:669" ph="exclude: &lt;1 item&gt;" />
+            <marker date="1520596953908" expanded="true" signature="660:669" ph="README.md" />
+            <marker date="1520596953908" expanded="true" signature="672:711" ph="gems: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="679:693" ph="jekyll-seo..." />
+            <marker date="1520596953908" expanded="true" signature="695:710" ph="jekyll-pag..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -662,15 +927,68 @@
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-          <folding />
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <marker date="1520596953908" expanded="true" signature="34:44" ph="嗨|生活本就是一个谜..." />
+            <marker date="1520596953908" expanded="true" signature="55:67" ph="/developme..." />
+            <marker date="1520596953908" expanded="true" signature="100:118" ph="mystte@fox..." />
+            <marker date="1520596953908" expanded="true" signature="135:140" ph="rouge" />
+            <marker date="1520596953908" expanded="true" signature="151:159" ph="kramdown" />
+            <marker date="1520596953908" expanded="true" signature="240:253" ph="UA-8397901..." />
+            <marker date="1520596953908" expanded="true" signature="284:296" ph="webjeda-de..." />
+            <marker date="1520596953908" expanded="true" signature="328:618" ph="compress_h...: &lt;7 keys&gt;" />
+            <marker date="1520596953908" expanded="true" signature="345:490" ph="clippings: [26 items]" />
+            <marker date="1520596953908" expanded="true" signature="357:361" ph="html" />
+            <marker date="1520596953908" expanded="true" signature="362:365" ph="div" />
+            <marker date="1520596953908" expanded="true" signature="370:372" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="374:376" ph="td" />
+            <marker date="1520596953908" expanded="true" signature="378:380" ph="h1" />
+            <marker date="1520596953908" expanded="true" signature="382:384" ph="h2" />
+            <marker date="1520596953908" expanded="true" signature="386:388" ph="h3" />
+            <marker date="1520596953908" expanded="true" signature="390:392" ph="h4" />
+            <marker date="1520596953908" expanded="true" signature="393:397" ph="link" />
+            <marker date="1520596953908" expanded="true" signature="399:403" ph="meta" />
+            <marker date="1520596953908" expanded="true" signature="405:411" ph="footer" />
+            <marker date="1520596953908" expanded="true" signature="413:416" ph="nav" />
+            <marker date="1520596953908" expanded="true" signature="418:421" ph="img" />
+            <marker date="1520596953908" expanded="true" signature="423:429" ph="header" />
+            <marker date="1520596953908" expanded="true" signature="431:433" ph="hr" />
+            <marker date="1520596953908" expanded="true" signature="435:437" ph="br" />
+            <marker date="1520596953908" expanded="true" signature="439:443" ph="head" />
+            <marker date="1520596953908" expanded="true" signature="445:450" ph="style" />
+            <marker date="1520596953908" expanded="true" signature="452:454" ph="li" />
+            <marker date="1520596953908" expanded="true" signature="456:458" ph="ul" />
+            <marker date="1520596953908" expanded="true" signature="460:462" ph="ol" />
+            <marker date="1520596953908" expanded="true" signature="464:468" ph="time" />
+            <marker date="1520596953908" expanded="true" signature="470:474" ph="main" />
+            <marker date="1520596953908" expanded="true" signature="476:482" ph="script" />
+            <marker date="1520596953908" expanded="true" signature="484:489" ph="title" />
+            <marker date="1520596953908" expanded="true" signature="493:520" ph="comments: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="504:511" ph="&lt;!-- " />
+            <marker date="1520596953908" expanded="true" signature="513:519" ph=" --&gt;" />
+            <marker date="1520596953908" expanded="true" signature="523:537" ph="endings: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="533:536" ph="all" />
+            <marker date="1520596953908" expanded="true" signature="540:565" ph="ignore: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="552:565" ph="envs: [1 item]" />
+            <marker date="1520596953908" expanded="true" signature="559:564" ph="local" />
+            <marker date="1520596953908" expanded="true" signature="580:585" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="597:602" ph="false" />
+            <marker date="1520596953908" expanded="true" signature="605:618" ph="startings: [0 items]" />
+            <marker date="1520596953908" expanded="true" signature="623:647" ph="sass: &lt;1 key&gt;" />
+            <marker date="1520596953908" expanded="true" signature="637:647" ph="compressed" />
+            <marker date="1520596953908" expanded="true" signature="649:669" ph="exclude: &lt;1 item&gt;" />
+            <marker date="1520596953908" expanded="true" signature="660:669" ph="README.md" />
+            <marker date="1520596953908" expanded="true" signature="672:711" ph="gems: [2 items]" />
+            <marker date="1520596953908" expanded="true" signature="679:693" ph="jekyll-seo..." />
+            <marker date="1520596953908" expanded="true" signature="695:710" ph="jekyll-pag..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CNAME">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
