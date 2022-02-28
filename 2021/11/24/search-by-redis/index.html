@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="要做什么？  可选方案有哪些？  具体如何实现？   要做什么   有这样一个需求，当在小程序中的搜索栏输入一个字或词时，下方自动显示出以这个字或词为前缀的相关词语。也就是要做字词的前缀模糊匹配。 可选方案   有这几种：（1）mysql模糊查询；（2）redis有序集合；（3）sphinx分词索引。考虑到具体场景涉及到的词语大约有几千个，最简单又能保证性能的就是redis方案。    使用re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用redis实现搜索词的自动匹配">
+<meta property="og:url" content="http://example.com/2021/11/24/search-by-redis/index.html">
+<meta property="og:site_name" content="LifeComposer">
+<meta property="og:description" content="要做什么？  可选方案有哪些？  具体如何实现？   要做什么   有这样一个需求，当在小程序中的搜索栏输入一个字或词时，下方自动显示出以这个字或词为前缀的相关词语。也就是要做字词的前缀模糊匹配。 可选方案   有这几种：（1）mysql模糊查询；（2）redis有序集合；（3）sphinx分词索引。考虑到具体场景涉及到的词语大约有几千个，最简单又能保证性能的就是redis方案。    使用re">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/11/24/search-by-redis/redis-sorted-set.jpg">
+<meta property="article:published_time" content="2021-11-24T07:23:34.000Z">
+<meta property="article:modified_time" content="2021-11-27T15:59:23.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/11/24/search-by-redis/redis-sorted-set.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>使用redis实现搜索词的自动匹配</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2022/02/28/hello-world/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2021/11/12/git-log/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/11/24/search-by-redis/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/11/24/search-by-redis/&text=使用redis实现搜索词的自动匹配"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/11/24/search-by-redis/&is_video=false&description=使用redis实现搜索词的自动匹配"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用redis实现搜索词的自动匹配&body=Check out this article: http://example.com/2021/11/24/search-by-redis/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/11/24/search-by-redis/&name=使用redis实现搜索词的自动匹配&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/11/24/search-by-redis/&t=使用redis实现搜索词的自动匹配"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A6%81%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">要做什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E6%96%B9%E6%A1%88"><span class="toc-number">2.</span> <span class="toc-text">可选方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%9E%84%E9%80%A0%E7%B4%A2%E5%BC%95"><span class="toc-number">3.1.</span> <span class="toc-text">1. 构造索引</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.2.</span> <span class="toc-text">2. 匹配查询</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">4.</span> <span class="toc-text">补充</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        使用redis实现搜索词的自动匹配
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-11-24T07:23:34.000Z" itemprop="datePublished">2021-11-24</time>
+        
+        (Updated: <time datetime="2021-11-27T15:59:23.068Z" itemprop="dateModified">2021-11-27</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <ol>
+<li><p>要做什么？</p>
+</li>
+<li><p>可选方案有哪些？</p>
+</li>
+<li><p>具体如何实现？</p>
+</li>
+</ol>
+<h4 id="要做什么"><a href="#要做什么" class="headerlink" title="要做什么"></a>要做什么</h4><p>   有这样一个需求，当在小程序中的搜索栏输入一个字或词时，下方自动显示出以这个字或词为前缀的相关词语。也就是要做字词的前缀模糊匹配。</p>
+<h4 id="可选方案"><a href="#可选方案" class="headerlink" title="可选方案"></a>可选方案</h4><p>   有这几种：（1）mysql模糊查询；（2）redis有序集合；（3）sphinx分词索引。考虑到具体场景涉及到的词语大约有几千个，最简单又能保证性能的就是redis方案。</p>
+<p>   使用redis实现词典排序的原理参考以下引文：</p>
+<blockquote>
+<p>Redis 排序集具有一个有趣的属性。当元素以相同的分数添加时，它们将按字典顺序排序，并将字符串作为二进制数据与函数进行比较。<code>memcmp()</code></p>
+<p>对于不懂C语言或函数的人来说，这意味着具有相同分数的元素被排序，比较其字节的原始值，一个字节接一个字节。如果第一个字节相同，则检查第二个字节，依此类推。如果两个字符串的公共前缀相同，则较长的字符串被视为两者中较大的字符串，因此”foobar”大于”foo”。<code>memcmp</code></p>
+<p>有一些命令，如<a target="_blank" rel="noopener" href="https://redis.io/commands/zrangebylex">ZRANGEBYLEX</a>和<a target="_blank" rel="noopener" href="https://redis.io/commands/zlexcount">ZLEXCOUNT，</a>能够以字典方式查询和计数范围，假设它们与排序集一起使用，其中所有元素具有相同的分数。</p>
+<p>这个Redis功能基本上等同于一个数据结构，它通常用于实现传统数据库的索引。正如您可以猜到的那样，因此可以使用此Redis数据结构来实现非常花哨的索引。<code>b-tree</code></p>
+<p>在深入研究使用词典索引之前，让我们检查一下排序集在这种特殊操作模式下的行为。由于我们需要添加具有相同分数的元素，因此我们将始终使用特殊分数为零。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;ZADD myindex 0 baaa</span><br><span class="line">&gt;ZADD myindex 0 abbb</span><br><span class="line">&gt;ZADD myindex 0 aaaa</span><br><span class="line">&gt;ZADD myindex 0 bbbb</span><br></pre></td></tr></table></figure>
+
+<p>从排序的集合中获取所有元素会立即显示它们是按字典顺序排列的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;ZRANGE myindex 0 -1</span><br><span class="line">&gt;1) &quot;aaaa&quot;</span><br><span class="line">&gt;2) &quot;abbb&quot;</span><br><span class="line">&gt;3) &quot;baaa&quot;</span><br><span class="line">&gt;4) &quot;bbbb&quot;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们可以使用<a target="_blank" rel="noopener" href="https://redis.io/commands/zrangebylex">ZRANGEBYLEX</a>来执行范围查询。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;ZRANGEBYLEX myindex [a (b</span><br><span class="line">&gt;1) &quot;aaaa&quot;</span><br><span class="line">&gt;2) &quot;abbb&quot;</span><br></pre></td></tr></table></figure>
+
+<p>请注意，在范围查询中，我们在 and 元素前面加上了特殊字符和 .此前缀是必需的，它们指定范围的元素是包含还是排除。因此，范围意味着在包含和排除之间给我字典上的所有元素，这些元素都是以 开头的元素。<code>min``max``[``(``[a (b``a``b``a</code></p>
+<p>还有两个特殊字符表示无限负字符串和无限正字符串，它们是 和 。<code>-``+</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;ZRANGEBYLEX myindex [b +</span><br><span class="line">&gt;1) &quot;baaa&quot;</span><br><span class="line">&gt;2) &quot;bbbb&quot;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://redis.io/topics/indexes?&amp;_ga=2.247049793.476974759.1637664795-572733517.1637664795#lexicographical-indexes">https://redis.io/topics/indexes?&amp;_ga=2.247049793.476974759.1637664795-572733517.1637664795#lexicographical-indexes</a></p>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><h5 id="1-构造索引"><a href="#1-构造索引" class="headerlink" title="1. 构造索引"></a>1. 构造索引</h5><p>试验一下，将<code>ab、ta、香、香蕉、香1、香2、香s、香t、香蕉梨、香1下</code>以及二进制转为十六进制的<code>香、香蕉、香1、香2、香s、香t、香蕉梨、香1下</code>存入有序集合中，如图：</p>
+<img src="/2021/11/24/search-by-redis/redis-sorted-set.jpg" class="" title="redis">
+
+<p>汉字转为十六进制后占用空间为原来的3倍，但是没有了<code>\x</code>字符，和英文、数字形式相同，便于查找。可以看出在score相同的情况下，词语已经按照ASCII顺序排列好了，含有相同前缀的词语（包含中、英文、数字、符号及其组合形成的词语）排列在相邻的位置。至此词语已经存入集合，并按相同前缀的相邻排列完成，后续以索引来指代这个有序集合。</p>
+<h5 id="2-匹配查询"><a href="#2-匹配查询" class="headerlink" title="2. 匹配查询"></a>2. 匹配查询</h5><p>（1）只要找到匹配到的词语序列的起点和终点就可以了。搜索词可以作为查找的起点，终点必须是可能的最大值，6位十六进制是’ffffff’，因此可以以搜索词拼接’ffffff’作为查找的终点。（2）但是起点词和终点词不一定包含在索引中，如果没有则需要插入进去，并且如果是在搜索时插入进去的也要在搜索结束后删除掉，防止污染索引。</p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>在实现前缀匹配的基础上，还想要对匹配到的词按历史搜索量排序，既然索引的分数score已经确定不能修改了，只能想办法修改索引的成员了。设想将统计到的搜索数量缀到索引字符串的末尾，并将词语和搜索量用一个分隔符隔开，这个符号在0<del>9、a</del>f之外即可，假设为“|”，匹配到词语后需要靠这个分隔符分离出词语的搜索数。拼接起来后发现影响了成员原来的排列顺序。如：原来有这样3个连续成员：<code>11111a、11111a1、11111c</code>（在有序集合中排列顺序与这里写出的顺序一致），它们3个的搜索量分别是：<code>1 20 5</code>，拼接搜索量后3者排列为：<code>11111a1|20、11111a|1、11111c|5</code>。修改分隔符为<code>0|</code></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A6%81%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">要做什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E6%96%B9%E6%A1%88"><span class="toc-number">2.</span> <span class="toc-text">可选方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%9E%84%E9%80%A0%E7%B4%A2%E5%BC%95"><span class="toc-number">3.1.</span> <span class="toc-text">1. 构造索引</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.2.</span> <span class="toc-text">2. 匹配查询</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">4.</span> <span class="toc-text">补充</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/11/24/search-by-redis/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/11/24/search-by-redis/&text=使用redis实现搜索词的自动匹配"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/11/24/search-by-redis/&is_video=false&description=使用redis实现搜索词的自动匹配"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用redis实现搜索词的自动匹配&body=Check out this article: http://example.com/2021/11/24/search-by-redis/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/11/24/search-by-redis/&title=使用redis实现搜索词的自动匹配"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/11/24/search-by-redis/&name=使用redis实现搜索词的自动匹配&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/11/24/search-by-redis/&t=使用redis实现搜索词的自动匹配"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2017-2022
+    LifeComposer
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

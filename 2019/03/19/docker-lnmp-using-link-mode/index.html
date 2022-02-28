@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="目标部署好mysql，php，nginx，运行一个php程序Lnmp版本centos 7.4php:7.1-fpmmysql:5.6nginx:1.12docker版本：18.09.1采用docker的link机制进行容器间的通信  一、创建资源文件夹既然安装好了Docker，我们创建容器后，我们需要映射一些配置文件或网站程序文件到宿主机，所以我们创建一些文件夹来存放这些东西，我是创建了以下这些文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker部署lnmp（使用link方式）">
+<meta property="og:url" content="http://example.com/2019/03/19/docker-lnmp-using-link-mode/index.html">
+<meta property="og:site_name" content="LifeComposer">
+<meta property="og:description" content="目标部署好mysql，php，nginx，运行一个php程序Lnmp版本centos 7.4php:7.1-fpmmysql:5.6nginx:1.12docker版本：18.09.1采用docker的link机制进行容器间的通信  一、创建资源文件夹既然安装好了Docker，我们创建容器后，我们需要映射一些配置文件或网站程序文件到宿主机，所以我们创建一些文件夹来存放这些东西，我是创建了以下这些文">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-28T13:55:50.115Z">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>docker部署lnmp（使用link方式）</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2019/03/19/common-shortcut-key/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2019/03/19/installing-docker-in-CentOS/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/03/19/docker-lnmp-using-link-mode/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&text=docker部署lnmp（使用link方式）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&is_video=false&description=docker部署lnmp（使用link方式）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=docker部署lnmp（使用link方式）&body=Check out this article: http://example.com/2019/03/19/docker-lnmp-using-link-mode/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&name=docker部署lnmp（使用link方式）&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&t=docker部署lnmp（使用link方式）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">2.</span> <span class="toc-text">一、创建资源文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%83%A8%E7%BD%B2Mysql"><span class="toc-number">3.</span> <span class="toc-text">二、部署Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-number">3.1.</span> <span class="toc-text">1. 拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">2. 运行容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="toc-number">3.3.</span> <span class="toc-text">3. 进入容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BC%80%E5%90%AFMysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.4.</span> <span class="toc-text">4. 开启Mysql远程连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%83%A8%E7%BD%B2PHP"><span class="toc-number">4.</span> <span class="toc-text">三、部署PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F-1"><span class="toc-number">4.1.</span> <span class="toc-text">1. 拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8-1"><span class="toc-number">4.2.</span> <span class="toc-text">2. 运行容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BAphp%E6%96%87%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">3. 创建php文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%83%A8%E7%BD%B2Nginx"><span class="toc-number">5.</span> <span class="toc-text">四、部署Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F-2"><span class="toc-number">5.1.</span> <span class="toc-text">1. 拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8-2"><span class="toc-number">5.2.</span> <span class="toc-text">2. 运行容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E4%B9%8B%E5%89%8D%E8%BF%90%E8%A1%8C%E7%9A%84Nginx%E5%AE%B9%E5%99%A8"><span class="toc-number">5.3.</span> <span class="toc-text">3. 删除之前运行的Nginx容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%87%8D%E6%96%B0%E8%BF%90%E8%A1%8CNginx%E5%AE%B9%E5%99%A8"><span class="toc-number">5.4.</span> <span class="toc-text">4. 重新运行Nginx容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BC%96%E8%BE%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">5.5.</span> <span class="toc-text">5.编辑配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%A3%80%E6%9F%A5nginx%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE%E5%AE%89%E8%A3%85"><span class="toc-number">5.6.</span> <span class="toc-text">6.检查nginx是否正确安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AE%89%E8%A3%85php%E6%89%A9%E5%B1%95"><span class="toc-number">6.</span> <span class="toc-text">五、安装php扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85php%E6%BA%90%E7%A0%81%E4%B8%AD%E7%9A%84%E6%89%A9%E5%B1%95"><span class="toc-number">6.1.</span> <span class="toc-text">安装php源码中的扩展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%85%8D%E7%BD%AEphpMyAdmin%EF%BC%8C%E5%B9%B6%E6%B5%8B%E8%AF%95MYSQL"><span class="toc-number">7.</span> <span class="toc-text">六、配置phpMyAdmin，并测试MYSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86phpMyAdmin%E9%83%A8%E7%BD%B2%E4%B8%BA%E5%8D%95%E7%8B%AC%E5%AE%B9%E5%99%A8"><span class="toc-number">7.1.</span> <span class="toc-text">将phpMyAdmin部署为单独容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%85%B6%E5%AE%83%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">8.</span> <span class="toc-text">七、其它注意事项</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        docker部署lnmp（使用link方式）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-03-18T16:00:00.000Z" itemprop="datePublished">2019-03-19</time>
+        
+        (Updated: <time datetime="2021-10-28T13:55:50.115Z" itemprop="dateModified">2021-10-28</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>部署好mysql，php，nginx，运行一个php程序<br>Lnmp版本<br>centos 7.4<br>php:7.1-fpm<br>mysql:5.6<br>nginx:1.12<br>docker版本：18.09.1<br>采用docker的link机制进行容器间的通信 </p>
+<h2 id="一、创建资源文件夹"><a href="#一、创建资源文件夹" class="headerlink" title="一、创建资源文件夹"></a>一、创建资源文件夹</h2><p>既然安装好了Docker，我们创建容器后，我们需要映射一些配置文件或网站程序文件到宿主机，所以我们创建一些文件夹来存放这些东西，我是创建了以下这些文件夹，你可以按照自己平时的习惯来创建。</p>
+<blockquote>
+<p>&#x2F;data</p>
+<blockquote>
+<p>&#x2F;mysql  存放数据库备份<br>&#x2F;nginx  nginx配置文件</p>
+<blockquote>
+<p>&#x2F;conf  </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>&#x2F;wwwroot  网站文件<br>&#x2F;wwwlogs  日志<br>&#x2F;source  程序源代码<br>&#x2F;download 下载目录</p>
+</blockquote>
+</blockquote>
+<h2 id="二、部署Mysql"><a href="#二、部署Mysql" class="headerlink" title="二、部署Mysql"></a>二、部署Mysql</h2><h3 id="1-拉取镜像"><a href="#1-拉取镜像" class="headerlink" title="1. 拉取镜像"></a>1. 拉取镜像</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:<span class="number">5.6</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-运行容器"><a href="#2-运行容器" class="headerlink" title="2. 运行容器"></a>2. 运行容器</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash">  -d  -p 3306:3306 -e MYSQL_ROOT_PASSWORD=12345678910 --name mysql mysql:5.6</span></span><br></pre></td></tr></table></figure>
+
+<p>参数说明<br>-d 让容器在后台运行<br>-p 添加主机到容器的端口映射，前面是映射到本地的端口，后面是需要映射的端口<br>-e 设置环境变量，MYSQL_ROOT_PASSWORD这里是设置mysql的root用户的初始密码<br>–name 容器的名字，随便取，但是必须唯一</p>
+<p>ps:其实我们可以仅仅使用docker run命令就行了。docker run会先去pull，然后再create。个人习惯先把镜像pull下来，在run的时候会很快。</p>
+<h3 id="3-进入容器"><a href="#3-进入容器" class="headerlink" title="3. 进入容器"></a>3. 进入容器</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it m_mysql /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>参数说明<br>-t 在容器里生产一个伪终端<br>-i 对容器内的标准输入 (STDIN) 进行交互</p>
+<p>容器中默认是没有vim的，所以我们首先要安装vim:<br>（在容器中执行）  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get update  </span><br><span class="line">apt-get install vim。</span><br></pre></td></tr></table></figure>
+<h3 id="4-开启Mysql远程连接"><a href="#4-开启Mysql远程连接" class="headerlink" title="4. 开启Mysql远程连接"></a>4. 开启Mysql远程连接</h3><p>这步你当然也可以不开启，可以使用ssh通道来连接，但是我这里记一笔。这里是5.6，注意了。</p>
+<p>(1).进入mysql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mysql -uroot -p12345678910 </span><br></pre></td></tr></table></figure>
+<p>(2).选择数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; use mysql</span><br></pre></td></tr></table></figure>
+<p>(3).开启远程连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;password&#x27;;</span><br><span class="line">&gt; FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+<p>(4).重启</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># service mysqld restart</span><br></pre></td></tr></table></figure>
+<p>这样就可以通过公网IP连接了，如果还是不行，请看看防火墙(自身防火墙或者各大云服务商的安全组配置)。</p>
+<h2 id="三、部署PHP"><a href="#三、部署PHP" class="headerlink" title="三、部署PHP"></a>三、部署PHP</h2><h3 id="1-拉取镜像-1"><a href="#1-拉取镜像-1" class="headerlink" title="1. 拉取镜像"></a>1. 拉取镜像</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># docker pull php:7.1</span><br></pre></td></tr></table></figure>
+<h3 id="2-运行容器-1"><a href="#2-运行容器-1" class="headerlink" title="2. 运行容器"></a>2. 运行容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># docker run \</span><br><span class="line">  -d \</span><br><span class="line">  -p 9000:9000 \</span><br><span class="line">  -v /usr/data/wwwroot:/usr/share/nginx/html \</span><br><span class="line">  --link mysql:php_mysql \</span><br><span class="line">  --name phpfpm php:7.1</span><br></pre></td></tr></table></figure>
+
+<p>参数说明<br>-d 让容器在后台运行<br>-p 添加主机到容器的端口映射<br>-v 添加目录映射<br>–name 容器的名字，随便取，但是必须唯一<br>–link link 是在两个contain之间建立一种父子关系，父container中的web，可以得到子container db上的信息。<br>通过link的方式创建容器，我们可以使用被Link容器的别名进行访问，而不是通过IP，解除了对IP的依赖。</p>
+<h3 id="3-创建php文件"><a href="#3-创建php文件" class="headerlink" title="3. 创建php文件"></a>3. 创建php文件</h3><p>在&#x2F;data&#x2F;wwwroot文件夹中创建并编辑index.php</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># touch index.php</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;hello!&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这时候你进php容器，在&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html文件夹中也能看到我们创建的index.php文件，因为我们设置了目录映射。这样我们就可以直接在宿主机直接更改，而不用进容器修改。</p>
+<h2 id="四、部署Nginx"><a href="#四、部署Nginx" class="headerlink" title="四、部署Nginx"></a>四、部署Nginx</h2><h3 id="1-拉取镜像-2"><a href="#1-拉取镜像-2" class="headerlink" title="1. 拉取镜像"></a>1. 拉取镜像</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># docker pull nginx:1.12</span><br></pre></td></tr></table></figure>
+<h3 id="2-运行容器-2"><a href="#2-运行容器-2" class="headerlink" title="2. 运行容器"></a>2. 运行容器</h3><p>我们先运行无挂载的容器，拿到nginx的一些配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># docker run -d -p 80:80 --name nginx nginx:1.12</span><br></pre></td></tr></table></figure>
+<p>成功后，我们进入容器&#x2F;etc&#x2F;nginx&#x2F;文件夹中，我们需要的挂载nginx.conf和conf.d文件夹中的配置文件，因为是我们平时需要频繁更改的配置，所以，我们将他们复制到宿主机上。</p>
+<p>退出命令行，使用exit。</p>
+<p>然后使用docker cp操作复制出文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># docker cp nginx:/etc/nginx/nginx.conf /usr/data/nginx</span><br><span class="line"># docker cp nginx:/etc/nginx/conf.d/default.conf /usr/data/nginx/conf</span><br></pre></td></tr></table></figure>
+<h3 id="3-删除之前运行的Nginx容器"><a href="#3-删除之前运行的Nginx容器" class="headerlink" title="3. 删除之前运行的Nginx容器"></a>3. 删除之前运行的Nginx容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># docker stop nginx</span><br><span class="line"># docker rm nginx</span><br></pre></td></tr></table></figure>
+<h3 id="4-重新运行Nginx容器"><a href="#4-重新运行Nginx容器" class="headerlink" title="4. 重新运行Nginx容器"></a>4. 重新运行Nginx容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># docker run \</span><br><span class="line">  -d \</span><br><span class="line">  -p 80:80 \</span><br><span class="line">  -v /usr/data/wwwroot:/usr/share/nginx/html \</span><br><span class="line">  -v /usr/data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \</span><br><span class="line">  -v /usr/data/nginx/conf:/etc/nginx/conf.d \</span><br><span class="line">  -v /usr/data/wwwlogs:/var/log/nginx \</span><br><span class="line">  --link phpfpm:nginx_phpfpm \</span><br><span class="line">  --name nginx nginx:1.12</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：<br>-d 让容器在后台运行<br>-p 添加主机到容器的端口映射<br>-v 添加目录映射,这里最好nginx容器的根目录最好写成和php容器中根目录一样。但是不一点非要一模一样,如果不一样在配置nginx的时候需要注意<br>–name 容器的名字<br>–link 与另外一个容器建立起联系</p>
+<h3 id="5-编辑配置文件"><a href="#5-编辑配置文件" class="headerlink" title="5.编辑配置文件"></a>5.编辑配置文件</h3><p>修改&#x2F;data&#x2F;nginx&#x2F;conf&#x2F;default.conf，我的配置如下：</p>
+<figure class="highlight nginx"><figcaption><span>configuration</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  _;</span><br><span class="line">    <span class="comment">#charset koi8-r;</span></span><br><span class="line">    <span class="attribute">access_log</span>  /var/log/nginx/default_nginx.log  main;</span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span>   /usr/share/nginx/html/default;</span><br><span class="line">        <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">#error_page  404              /404.html;</span></span><br><span class="line">    <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="attribute">error_page</span>   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /50x.html;</span><br><span class="line">    <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">        <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">    <span class="comment">#    proxy_pass   http://127.0.0.1;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="section">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">        <span class="attribute">root</span>           /usr/share/nginx/html;</span><br><span class="line">        <span class="attribute">fastcgi_pass</span>   phpfpm:<span class="number">9000</span>;</span><br><span class="line">        <span class="attribute">fastcgi_index</span>  index.php;</span><br><span class="line">        <span class="attribute">fastcgi_param</span>  SCRIPT_FILENAME  <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">        <span class="comment">#$document_root$fastcgi_script_name 这是php脚本的地址：根目录$document_root加上请求参数$fastcgi_script_name</span></span><br><span class="line">        <span class="attribute">include</span>        fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># deny access to .htaccess files, if Apache&#x27;s document root</span></span><br><span class="line">    <span class="comment"># concurs with nginx&#x27;s one</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ /\.ht &#123;</span></span><br><span class="line">    <span class="comment">#    deny  all;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于配置文件中的<code>fastcgi_pass phpfpm:9000;</code>，因为我们在启动容器的时候–link了phpfpm容器，所以这里直接填phpfpm，就能找到phpfpm的IP，当然你也可以不配置–link，那么你可以找到容器IP，再将IP填入。</p>
+<h3 id="6-检查nginx是否正确安装"><a href="#6-检查nginx是否正确安装" class="headerlink" title="6.检查nginx是否正确安装"></a>6.检查nginx是否正确安装</h3><p>(1)先看nginx进程中有没有；命令：ps -ef | grep nginx<br>(2)再看端口，命令：netstat -lnt|grep 80<br>(3)linux本机输入命令curl -i 127.0.0.1: 端口号 或者wget 127.0.0.1:端口号<br>如：<code>curl 127.0.0.1:8080/index.php</code> (-i&#x2F;–include 输出时包括protocol头信息)  </p>
+<h2 id="五、安装php扩展"><a href="#五、安装php扩展" class="headerlink" title="五、安装php扩展"></a>五、安装php扩展</h2><h3 id="安装php源码中的扩展"><a href="#安装php源码中的扩展" class="headerlink" title="安装php源码中的扩展"></a>安装php源码中的扩展</h3><p>添加gd,mysqli,pdo-mysql,opcache,gettext,mcrypt等扩展，<br>进入Php容器内部使用以下命令（以mysqli为例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-php-ext-install pdo_mysql mysqli</span><br></pre></td></tr></table></figure>
+<p>退出不结束(连续按Ctrl+q和Ctrl+p，退出bash且让容器继续运行)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl-q + Ctrl-p</span><br></pre></td></tr></table></figure>
+<p>重启Php容器，是配置生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart  phpfpm </span><br></pre></td></tr></table></figure>
+<h2 id="六、配置phpMyAdmin，并测试MYSQL"><a href="#六、配置phpMyAdmin，并测试MYSQL" class="headerlink" title="六、配置phpMyAdmin，并测试MYSQL"></a>六、配置phpMyAdmin，并测试MYSQL</h2><h3 id="将phpMyAdmin部署为单独容器"><a href="#将phpMyAdmin部署为单独容器" class="headerlink" title="将phpMyAdmin部署为单独容器"></a>将phpMyAdmin部署为单独容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker pull phpmyadmin/phpmyadmin:4.7</span><br><span class="line">docker run --name phpmyadmin -d --link mysql:pma_mysql -e PMA_HOST=39.98.42.9 -e PMA_PORT=3306 -p 8081:80 phpmyadmin/phpmyadmin:4.7</span><br><span class="line"></span><br><span class="line">docker exec -it phpmyadmin /bin/sh （注意不同于之前的bash）</span><br></pre></td></tr></table></figure>
+<p>说明：PMA_HOST和PMA_PORT是Mysql的ip和端口号<br>安装mysqli扩展即可访问</p>
+<h2 id="七、其它注意事项"><a href="#七、其它注意事项" class="headerlink" title="七、其它注意事项"></a>七、其它注意事项</h2><p>1.若需ping测试，需在容器中安装Ping，使用以下命令即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install inetutils-ping</span><br></pre></td></tr></table></figure>
+<p>2.配置了端口，安装完成后。打开服务器的安全组规则，设置入方向的端口为可访问<br>3.从别处复制来的docker命令在终端执行，可能会因半全角的原因报：“docker: invalid reference format”错误</p>
+<hr>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/freefei/p/7904165.html">安装PHP扩展</a>  <a target="_blank" rel="noopener" href="https://notemi.cn/docker-quickly-set-up-php-nginx-mysql-environment.html">docker安装LNMP</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">2.</span> <span class="toc-text">一、创建资源文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%83%A8%E7%BD%B2Mysql"><span class="toc-number">3.</span> <span class="toc-text">二、部署Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-number">3.1.</span> <span class="toc-text">1. 拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">2. 运行容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="toc-number">3.3.</span> <span class="toc-text">3. 进入容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BC%80%E5%90%AFMysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.4.</span> <span class="toc-text">4. 开启Mysql远程连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%83%A8%E7%BD%B2PHP"><span class="toc-number">4.</span> <span class="toc-text">三、部署PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F-1"><span class="toc-number">4.1.</span> <span class="toc-text">1. 拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8-1"><span class="toc-number">4.2.</span> <span class="toc-text">2. 运行容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BAphp%E6%96%87%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">3. 创建php文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%83%A8%E7%BD%B2Nginx"><span class="toc-number">5.</span> <span class="toc-text">四、部署Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F-2"><span class="toc-number">5.1.</span> <span class="toc-text">1. 拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8-2"><span class="toc-number">5.2.</span> <span class="toc-text">2. 运行容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E4%B9%8B%E5%89%8D%E8%BF%90%E8%A1%8C%E7%9A%84Nginx%E5%AE%B9%E5%99%A8"><span class="toc-number">5.3.</span> <span class="toc-text">3. 删除之前运行的Nginx容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%87%8D%E6%96%B0%E8%BF%90%E8%A1%8CNginx%E5%AE%B9%E5%99%A8"><span class="toc-number">5.4.</span> <span class="toc-text">4. 重新运行Nginx容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BC%96%E8%BE%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">5.5.</span> <span class="toc-text">5.编辑配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%A3%80%E6%9F%A5nginx%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE%E5%AE%89%E8%A3%85"><span class="toc-number">5.6.</span> <span class="toc-text">6.检查nginx是否正确安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AE%89%E8%A3%85php%E6%89%A9%E5%B1%95"><span class="toc-number">6.</span> <span class="toc-text">五、安装php扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85php%E6%BA%90%E7%A0%81%E4%B8%AD%E7%9A%84%E6%89%A9%E5%B1%95"><span class="toc-number">6.1.</span> <span class="toc-text">安装php源码中的扩展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%85%8D%E7%BD%AEphpMyAdmin%EF%BC%8C%E5%B9%B6%E6%B5%8B%E8%AF%95MYSQL"><span class="toc-number">7.</span> <span class="toc-text">六、配置phpMyAdmin，并测试MYSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86phpMyAdmin%E9%83%A8%E7%BD%B2%E4%B8%BA%E5%8D%95%E7%8B%AC%E5%AE%B9%E5%99%A8"><span class="toc-number">7.1.</span> <span class="toc-text">将phpMyAdmin部署为单独容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%85%B6%E5%AE%83%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">8.</span> <span class="toc-text">七、其它注意事项</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/03/19/docker-lnmp-using-link-mode/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&text=docker部署lnmp（使用link方式）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&is_video=false&description=docker部署lnmp（使用link方式）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=docker部署lnmp（使用link方式）&body=Check out this article: http://example.com/2019/03/19/docker-lnmp-using-link-mode/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&title=docker部署lnmp（使用link方式）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&name=docker部署lnmp（使用link方式）&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/03/19/docker-lnmp-using-link-mode/&t=docker部署lnmp（使用link方式）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2017-2022
+    LifeComposer
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
